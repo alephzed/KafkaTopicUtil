@@ -55,5 +55,27 @@ public class CommsKafkaConsumerUtil{
 
 
 	}
+	
+	public long getCurrentOffset(final TopicProperties properties) {
+
+    final KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(broker.getClientConfiguration(properties, false));
+    
+    final TopicPartition partition = new TopicPartition(properties.getTopic(), properties.getPartitions());
+    
+    final List<TopicPartition> topicList = new ArrayList<TopicPartition>();
+    topicList.add(partition);
+    
+    kafkaConsumer.assign(topicList);
+    
+    final long position = kafkaConsumer.position(partition);
+    logger.info("current Position: " + position);
+    
+    
+    kafkaConsumer.close();
+    
+    return position;
+
+
+  }
 
 }

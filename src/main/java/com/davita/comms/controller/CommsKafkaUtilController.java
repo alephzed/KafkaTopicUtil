@@ -3,6 +3,7 @@ package com.davita.comms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,20 @@ public class CommsKafkaUtilController {
     consumerUtil.updateOffset(properties, offset);
 
     return new ResponseEntity<String>(HttpStatus.CREATED);
+  }
+  
+  @GetMapping("offset")
+  public ResponseEntity<String> getOffset(@RequestParam(value = "topic") final String topic,
+      @RequestParam(value = "group") final String group,
+      @RequestParam(value = "partition") final int partition) {
+    
+    final TopicProperties properties =  new TopicProperties();
+    properties.setTopic(topic);
+    properties.setGroupId(group);
+    properties.setPartitions(partition);
+    final long currentoffset = consumerUtil.getCurrentOffset(properties);
+
+    return new ResponseEntity<String>("The current Offset is "+currentoffset,HttpStatus.OK);
   }
 
 }
