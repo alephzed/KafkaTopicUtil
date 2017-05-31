@@ -1,0 +1,60 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.0.RELEASE'
+        springVersion = '4.3.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'spring-boot'
+
+
+jar {
+    baseName = 'KafkaTopicUtil'
+    version = '1.0.0-SNAPSHOT'
+}
+
+bootRun {
+    systemProperties System.properties
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    providedRuntime
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile("org.apache.kafka:kafka-clients:0.10.0.1")
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    compile("org.springframework.boot:spring-boot-configuration-processor")
+    compile('org.apache.commons:commons-lang3:3.4')
+    compile("org.apache.commons:commons-io:1.3.2")
+    compile('org.apache.commons:commons-collections4:4.0')
+    compile('javax.interceptor:javax.interceptor-api:1.+')
+}
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}

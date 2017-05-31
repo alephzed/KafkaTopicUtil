@@ -1,0 +1,13 @@
+---
+applications:
+- name: kafkatool-qa
+  memory: 256M
+  instances: 1
+  path: build/libs/KafkaTopicUtil-1.0.0-SNAPSHOT.jar
+  timeout: 180
+  host: kafkatool-qa
+  services:
+    - Comms-Message-Hub
+  env:
+    spring.profiles.active: cloud,kafka
+    JAVA_OPTS: " -Dspring.profiles.active=cloud,kafka"    

@@ -1,0 +1,14 @@
+#spring:
+ # profiles:
+  #  active: local
+
+---
+
+spring:
+  # everything that follows belongs to the dev environment
+  profiles: kafka
+  
+kafka:
+  kafkaHosts: 
+    - "localhost:9092"
+    - "localhost:9093"

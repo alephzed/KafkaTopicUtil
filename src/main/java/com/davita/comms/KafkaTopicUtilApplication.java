@@ -1,0 +1,18 @@
+package com.davita.comms;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+@SpringBootApplication
+public class KafkaTopicUtilApplication {
+
+	private static final Logger log = LoggerFactory.getLogger(KafkaTopicUtilApplication.class);
+
+	public static void main(final String[] args) {
+		SpringApplication.run(KafkaTopicUtilApplication.class, args);
+	}
+
+}

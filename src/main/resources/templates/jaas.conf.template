@@ -1,0 +1,6 @@
+KafkaClient {
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+    serviceName="Comms-Message-Hub"
+    username="$USERNAME"
+    password="$PASSWORD";
+};
